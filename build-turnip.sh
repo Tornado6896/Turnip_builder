@@ -21,7 +21,7 @@ magiskdir="$workdir/turnip_module"      # Directory to create the Magisk module
 DRIVER_FILE="vulkan.turnip.so"          # Output Vulkan Driver (emulator)
 META_FILE="meta.json"                   # Metadata
 
-#ZIP_FILE_MAGISK="Turnip-26.0.3-MAGISK-KSU.zip"
+ZIP_FILE_MAGISK="Turnip-26.0.3-MAGISK-KSU.zip"
 ZIP_FILE_EMULATOR="Turnip-26-0.3-EMULATOR.zip" 
 
 # List of required packages to build the Turnip driver
@@ -167,7 +167,7 @@ if ! [ -a libvulkan_freedreno.so ]; then
     echo -e "$red Build failed! libvulkan_freedreno.so not found $nocolor" && exit 1
 fi
 
-<< 'MULTILINE-COMMENT'
+
 echo "Prepare magisk module structure..." $'\n'
 p1="system/vendor/lib64/hw"
 mkdir -p "$magiskdir/$p1"
@@ -294,16 +294,16 @@ ui_print "BY: @VEKT0R_87"
 ui_print ""
 EOF
 
-#echo "Packing driver files into Magisk/KSU module ..." $'\n'
+echo "Packing driver files into Magisk/KSU module ..." $'\n'
 
-#zip -r "$workdir/$ZIP_FILE_MAGISK" * &> /dev/null
+zip -r "$workdir/$ZIP_FILE_MAGISK" * &> /dev/null
 
-#if [[ ! -f "$workdir/$ZIP_FILE_MAGISK" ]]; then
+if [[ ! -f "$workdir/$ZIP_FILE_MAGISK" ]]; then
     #echo -e "${red}Error: Zipping driver files failed.${nocolor}"
     #exit 1
-#else
-   # clear
-MULTILINE-COMMENT
+else
+    clear
+
 
     echo " Its time to create Turnip build for EMULATOR"
 
