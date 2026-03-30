@@ -7,7 +7,6 @@
 Simple Bash script that aims to build a turnip driver for **EMULATOR**
 
 
- 
 ## How to Build Locally 🤔
 
 Simply clone this repo and use **BASH** to build 
@@ -15,10 +14,6 @@ Simply clone this repo and use **BASH** to build
 ``` 
 bash build-turnip.sh
 ``` 
-
-
-
-
 
 
 ### NOTES :
@@ -35,8 +30,6 @@ bash build-turnip.sh
 # CREDITS 🙏
 
 ### This project wont be possible without the help of these amazing people below :
- 
- **[@MrMiy4mo](//github.com/ilhan-athn7)** for creating the turnip build script and letting me modify and learn from it. 
  
  **[@Mesa3D Team](//gitlab.freedesktop.org/mesa/mesa)** for giving us such amazing drivers so that we can further improve our device performance.
 
