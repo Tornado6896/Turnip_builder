@@ -12,7 +12,7 @@ sdkver="34"
 
 # Define Mesa version and download URL
 mesadir="mesa-mesa-26.0.3"
-mesaver="https://github.com/Tornado6896/MESA26.git"
+mesaver="https://github.com/whitebelyash/mesa-tu8.git"
 # Define working directories
 workdir="$(pwd)/turnip_workdir"         # Base directory for all operations
 magiskdir="$workdir/turnip_module"      # Directory to create the Magisk module
