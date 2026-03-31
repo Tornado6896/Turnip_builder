@@ -40,21 +40,6 @@ check_deps(){
 	fi
 
 	echo "Установка зависимости python Mako..."
-	sudo apt update
-sudo apt install -y \
-    meson ninja-build python3-mako \
-    libxcb-shm0-dev libpciaccess-dev \
-    libwayland-dev wayland-protocols \
-    libdrm-dev libx11-xcb-dev libxcb-dri2-0-dev \
-    libxcb-glx0-dev libxcb-present-dev libxcb-randr0-dev \
-    libxcb-sync-dev libxshmfence-dev \
-    libxcb-xfixes0-dev libxrandr-dev \
-    libegl1-mesa-dev libgl1-mesa-dev libgles2-mesa-dev \
-    llvm-dev libclang-dev \
-    libvulkan-dev vulkan-headers \
-    git build-essential pkg-config \
-    bison flex gettext \
-    libzstd-dev libssl-dev
 	pip install mako &> /dev/null
 }
 
