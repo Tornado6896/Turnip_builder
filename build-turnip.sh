@@ -5,10 +5,6 @@ green='\033[0;32m'
 red='\033[0;31m'
 nocolor='\033[0m'
 
-# Define Android NDK version and download URL
-ndkdir="android-ndk-r30-beta1"
-#ndkver="https://dl.google.com/android/repository/${ndkdir}-linux.zip"
-sdkver="34"
 
 # Define Mesa version and download URL
 mesadir="mesa-mesa-26.0.3"
@@ -19,6 +15,12 @@ mesasrc="https://github.com/Tornado6896/mesa_26_03"
 # Define working directories
 workdir="$(pwd)/turnip_workdir"         # Base directory for all operations
 magiskdir="$workdir/turnip_module"      # Directory to create the Magisk module
+
+
+# Define Android NDK version and download URL
+ndkdir="$workdir/android-ndk-r30-beta1"
+#ndkver="https://dl.google.com/android/repository/${ndkdir}-linux.zip"
+sdkver="34"
 
 DRIVER_FILE="vulkan.turnip.so"          # Output Vulkan Driver (emulator)
 META_FILE="meta.json"                   # Metadata
