@@ -146,8 +146,8 @@ cd $mesadir
 #meson build-android-aarch64 
 #--cross-file android-aarch64 -Dbuildtype=release -Dplatforms=android -Dplatform-sdk-version=31 -Dandroid-stub=true -Dgallium-drivers= -Dvulkan-drivers=freedreno -Dfreedreno-kgsl=true -Db_lto=true
 CC=clang CXX=clang++ meson setup build-android-aarch64 \
-   # --cross-file "$workdir/$mesadir/android-aarch64.txt" \
-   --cross-file android-aarch64 \
+   --cross-file "$workdir/$mesadir/android-aarch64.txt" \
+   #--cross-file android-aarch64 \
     --native-file "$workdir/$mesadir/native.txt" \
     -Dbuildtype=release \
     -Dplatforms=android \
