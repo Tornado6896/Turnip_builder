@@ -13,7 +13,7 @@ ndk="$HOME/$ndkver/toolchains/llvm/prebuilt/linux-x86_64/bin"
 sdkver="34"
 mesasrc="https://github.com/Tornado6896/mesa-a825.git"
 srcfolder="A825"
-
+read -p "Введите номер сборки: " $BUILD_VERSION
 clear
 
 run_all(){
