@@ -8,9 +8,9 @@ nocolor='\033[0m'
 # Список необходимых зависимостей
 deps="git meson ninja patchelf unzip curl pip flex bison zip glslang glslangValidator"
 workdir="$(pwd)/turnip_workdir"
-ndkver="android-ndk-r29"
+ndkver="android-ndk-r31-beta1"
 ndk="$HOME/$ndkver/toolchains/llvm/prebuilt/linux-x86_64/bin"
-sdkver="34"
+sdkver="31"
 mesasrc="https://github.com/Tornado6896/mesa-a825.git"
 srcfolder="A825"
 
@@ -49,7 +49,7 @@ prepare_workdir(){
 	echo "Подготовка рабочей директории..."
 	mkdir -p "$workdir" && cd "$workdir"
 
-	#echo "Загрузка Android NDK r29..."
+	#echo "Загрузка Android NDK r31..."
 	#curl -L https://dl.google.com/android/repository/"$ndkver"-linux.zip --output "$ndkver"-linux.zip &> /dev/null
 	#echo "Распаковка NDK..."
 	#unzip -q "$ndkver"-linux.zip &> /dev/null
@@ -64,7 +64,7 @@ prepare_workdir(){
 
 build_lib_for_android(){
 	echo "==== Сборка Mesa на ветке $1 ===="
-	git checkout origin/$1
+	#git checkout origin/$1
 
 	mkdir -p "$workdir/bin"
 	ln -sf "$ndk/clang" "$workdir/bin/cc"
@@ -128,7 +128,7 @@ EOF
 		-Dvulkan-beta=true \
 		-Dfreedreno-kmds=kgsl \
 		-Degl=disabled \
-		-Dplatform-sdk-version=36 \
+		-Dplatform-sdk-version=31 \
 		-Dandroid-libbacktrace=disabled \
 		--reconfigure
 
@@ -146,7 +146,7 @@ EOF
   "schemaVersion": 1,
   "name": "A825 T-$BUILD_VERSION",
   "description": "Сборка для Adreno 825. Ветка: $1",
-  "author": "whitebelyash / DVD_Disk / Tornado6896",
+  "author": "Tornado6896",
   "packageVersion": "1",
   "vendor": "Mesa",
   "driverVersion": "Vulkan 1.4.335",
