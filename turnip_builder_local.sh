@@ -4,7 +4,7 @@
 green='\033[0;32m'
 red='\033[0;31m'
 nocolor='\033[0m'
-export SELECTED_BRANCH
+
 # Список необходимых зависимостей
 deps="git meson ninja patchelf unzip curl pip flex bison zip glslang glslangValidator"
 workdir="$(pwd)"
@@ -12,7 +12,7 @@ ndkver="android-ndk-r30-beta1"
 ndk="$HOME/$ndkver/toolchains/llvm/prebuilt/linux-x86_64/bin"
 sdkver="35"
 mesasrc="https://github.com/Tornado6896/mesa-tu8.git"
-srcfolder="$SELECTED_BRANCH"
+#srcfolder="$SELECTED_BRANCH"
 
 declare -A BRANCHES=(
     [1]="a825"
@@ -62,7 +62,8 @@ SELECTED_BRANCH="$branch_name"
 # Запуск выбора
 choose_branch
     # Экспортируем переменную для использования в других скриптах
-
+export SELECTED_BRANCH
+srcfolder="$SELECTED_BRANCH"
 read -p "Введите номер сборки: " BUILD_VERSION
 
 clear
