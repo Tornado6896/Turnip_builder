@@ -38,7 +38,7 @@ choose_branch() {
         if [[ "$choice" =~ ^[0-9]+$ ]] && [[ -n "${BRANCHES[$choice]}" ]]; then
             branch_name="${BRANCHES[$choice]}"
         # Проверка, является ли ввод названием ветки
-        elif [[ "$choice" == "A825" || "$choice" == "A829" ]]; then
+        elif [[ "$choice" == "a825" || "$choice" == "a829" ]]; then
             branch_name="$choice"
         else
             echo "Ошибка: неверный выбор. Пожалуйста, введите 1, 2, 825 или 829."
