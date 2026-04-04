@@ -4,7 +4,7 @@
 green='\033[0;32m'
 red='\033[0;31m'
 nocolor='\033[0m'
-
+export SELECTED_BRANCH
 # Список необходимых зависимостей
 deps="git meson ninja patchelf unzip curl pip flex bison zip glslang glslangValidator"
 workdir="$(pwd)"
@@ -47,11 +47,11 @@ choose_branch() {
     done
 
     echo "Вы выбрали ветку: $branch_name"
-    read -p "Подтвердите выбор (y/n): " confirm
+    """read -p "Подтвердите выбор (y/n): " confirm
     if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
         echo "Выход."
         exit 0
-    fi
+    fi"""
 SELECTED_BRANCH="$branch_name"
 
     echo "Переменная SELECTED_BRANCH установлена в '$SELECTED_BRANCH'"
@@ -60,7 +60,6 @@ SELECTED_BRANCH="$branch_name"
 # Запуск выбора
 choose_branch
     # Экспортируем переменную для использования в других скриптах
-    export SELECTED_BRANCH
 
 read -p "Введите номер сборки: " BUILD_VERSION
 
