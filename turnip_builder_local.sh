@@ -55,7 +55,7 @@ choose_branch() {
     # fi 
 	
 #SELECTED_BRANCH="$branch_name"
-
+srcfolder="$branch_name"
    # echo "Переменная SELECTED_BRANCH установлена в '$SELECTED_BRANCH'"
 }
 
