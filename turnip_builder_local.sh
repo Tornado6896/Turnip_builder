@@ -53,13 +53,9 @@ choose_branch() {
         exit 0
     fi
 
-    # Экспортируем переменную для использования в других скриптах
-    export SELECTED_BRANCH="$branch_name"
+    SELECTED_BRANCH="$branch_name"
     echo "Переменная SELECTED_BRANCH установлена в '$SELECTED_BRANCH'"
 }
-
-# Запуск выбора
-choose_branch
 
 
 read -p "Введите номер сборки: " BUILD_VERSION
