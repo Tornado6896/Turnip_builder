@@ -23,7 +23,7 @@ declare -A BRANCHES=(
 show_menu() {
     echo "Доступные ветки для сборки драйвера:"
     for key in "${!BRANCHES[@]}"; do
-        echo "  $key) ${BRANCHES[$key]}"
+        echo "$key: ${BRANCHES[$key]}"
     done
 }
 
