@@ -61,7 +61,7 @@ clear
 
 run_all(){
 	echo "====== Начало сборки TU v-$BUILD_VERSION ! ======"
-	check_deps
+	#check_deps
 	prepare_workdir
 	build_lib_for_android $srcfolder
 }
