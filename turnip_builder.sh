@@ -170,16 +170,16 @@ EOF
 		-Db_lto=false \
 		-Dstrip=true \
 		-Dplatforms=android \
-		-Dvideo-codecs= \
+		-Dvideo-codecs=all\
 		-Dplatform-sdk-version="$sdkver" \
 		-Dandroid-stub=true \
-		-Dgallium-drivers= \
+		-Dgallium-drivers=zink \
 		-Dvulkan-drivers=freedreno \
 		-Dvulkan-beta=true \
 		-Dfreedreno-kmds=kgsl \
-		-Degl=disabled \
+		-Degl=enable \
 		-Dperfetto=true \
-		-Dandroid-libbacktrace=disabled \
+		-Dandroid-libbacktrace=enable \
 		--reconfigure
 
 	echo "Компиляция через Ninja (это займет время)..."
