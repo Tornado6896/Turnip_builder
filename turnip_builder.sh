@@ -180,7 +180,9 @@ EOF
 		-Degl=enabled \
 		-Dperfetto=true \
 		-Dandroid-libbacktrace=enabled \
+		-D_libdrm=disabled \
 		--reconfigure
+	
 
 	echo "Компиляция через Ninja (это займет время)..."
 	ninja -C build-android-aarch64 install
