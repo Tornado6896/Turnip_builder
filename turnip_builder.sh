@@ -11,8 +11,48 @@ workdir="$(pwd)"
 ndkver="android-ndk-r30-beta1"
 ndk="$HOME/$ndkver/toolchains/llvm/prebuilt/linux-x86_64/bin"
 sdkver="35"
-mesasrc="https://github.com/Tornado6896/mesa-tu8.git"
+mesasrc="$repo_url"
 srcfolder="$branch_name"
+
+
+repos=(
+    "mesa-tu8:https://github.com/Tornado6896/mesa-tu8.git"
+    "mesa-8xx:https://github.com/Tornado6896/mesa-8xx.git"
+)
+
+show_menu() {
+    echo "Доступные репозитории:"
+    for i in "${!repos[@]}"; do
+        name="${repos[$i]%%:*}"
+        echo "$((i+1)). $name"
+    done
+    echo "0. Выйти"
+}
+
+# Основной цикл выбора
+while true; do
+    show_menu
+    read -p "Выберите номер репозитория (0-${#repos[@]}): " choice
+
+    # Проверка на выход
+    if [[ "$choice" == "0" ]]; then
+        echo "Выход."
+        exit 0
+    fi
+
+    # Проверка корректности ввода (число в диапазоне)
+    if [[ "$choice" =~ ^[0-9]+$ ]] && [ "$choice" -ge 1 ] && [ "$choice" -le "${#repos[@]}" ]; then
+        index=$((choice-1))
+        repo_entry="${repos[$index]}"
+        repo_name="${repo_entry%%:*}"
+        repo_url="${repo_entry#*:}"
+
+        echo "Выбран репозиторий: $repo_name"
+        echo "URL: $repo_url"
+
+        # Присваиваем переменной mesasrc выбранный URL
+        mesasrc="$repo_url"
+done
 
 declare -A BRANCHES=(
     [1]="a825"
