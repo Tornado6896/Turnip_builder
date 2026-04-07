@@ -182,8 +182,7 @@ EOF
 		-Dandroid-libbacktrace=enabled \
 		-Dgbm=enabled \
 		-Dgles1=enabled \
-		-Dgles2=enabled \
-		-Dglx=dri 
+		-Dgles2=enabled 
 
 #===============================================================================
 # 8) Install built libraries from staging
