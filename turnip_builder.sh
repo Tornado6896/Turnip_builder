@@ -166,23 +166,21 @@ EOF
 		--cross-file "android-aarch64.txt" \
 		--native-file "native.txt" \
 		--prefix /tmp/Turnip-$srcfolder \
-		-Dbuildtype=release \
+	-Dbuildtype=release \
 		-Db_lto=false \
 		-Dstrip=true \
 		-Dplatforms=android \
 		-Dvideo-codecs=all \
 		-Dplatform-sdk-version="$sdkver" \
 		-Dandroid-stub=true \
-		-Dgallium-drivers=freedreno \
+		-Dgallium-drivers= freedreno\
 		-Dvulkan-drivers=freedreno \
 		-Dvulkan-beta=true \
 		-Dfreedreno-kmds=kgsl \
-		-Degl=enabled \
+		-Degl=disabled \
 		-Dperfetto=true \
-		-Dandroid-libbacktrace=enabled \
-		-Dgbm=enabled \
-		-Dgles1=enabled \
-		-Dgles2=enabled 
+		-Dandroid-libbacktrace=disabled \
+		--reconfigure
 
 #===============================================================================
 # 8) Install built libraries from staging
