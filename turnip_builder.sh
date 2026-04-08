@@ -193,7 +193,7 @@ EOF
         -Dplatforms=android \
         -Dvideo-codecs= \
         -Dplatform-sdk-version="$sdkver" \
-        -Dandroid-stub=true \
+       # -Dandroid-stub=true \
         -Dgallium-drivers= \
         -Dvulkan-drivers=freedreno \
         -Dvulkan-beta=true \
