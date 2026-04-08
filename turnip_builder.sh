@@ -121,7 +121,9 @@ prepare_workdir() {
     echo "Клонирование исходного кода Mesa из $mesasrc (ветка $srcfolder)..."
     git clone --branch "$srcfolder" --depth=1 "$mesasrc" "$srcfolder"
     cd "$srcfolder"
-    
+	
+	sed -i '1d' include/android_stub/sync/sync.h
+ 
     echo "Запись версии TU..."
     echo "#define TUGEN8_DRV_VERSION \"$BUILD_VERSION\"" > ./src/freedreno/vulkan/tu_version.h
 }
@@ -201,7 +203,7 @@ EOF
         -Degl=disabled \
         -Dandroid-libbacktrace=disabled \
         --reconfigure
-	cat -n src/android_stub/sync_stub.cpp | head -35
+	
     echo "Компиляция через Ninja (это займет время)..."
     ninja -C build-android-aarch64 install
 
