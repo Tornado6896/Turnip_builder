@@ -198,6 +198,7 @@ EOF
         -Dvulkan-beta=true \
         -Dfreedreno-kmds=kgsl \
         -Degl=disabled \
+		-Dperfetto=true \
         -Dandroid-libbacktrace=disabled \
         --reconfigure
 	
