@@ -15,7 +15,7 @@ sdkver="35"
 # Доступные репозитории
 declare -A REPOS=(
 	[1]="https://github.com/Tornado6896/mesa.git"
-	[2]="https://gitlab.freedesktop.org/mesa/mesa.gi"
+	[2]="https://gitlab.freedesktop.org/mesa/mesa.git"
 )
 
 # Доступные ветки (зависят от репозитория, но для простоты оставим общие)
@@ -144,14 +144,13 @@ build_lib_for_android() {
 
     echo "Генерация файлов кросс-компиляции..."
     if command -v ccache >/dev/null 2>&1; then
-    CCACHE_PREFIX="ccache"
-else
-    CCACHE_PREFIX=""
-    echo "ccache не найден, компиляция будет без кэширования."
-fi
+        CCACHE_PREFIX="ccache"
+    else
+        CCACHE_PREFIX=""
+        echo "ccache не найден, компиляция будет без кэширования."
+    fi
 
-
-cat <<EOF >"android-aarch64.txt"
+    cat <<EOF >"android-aarch64.txt"
 [binaries]
 ar = '$ndk/llvm-ar'
 c = [${CCACHE_PREFIX:+"'$CCACHE_PREFIX',"} '$ndk/aarch64-linux-android$sdkver-clang']
@@ -168,7 +167,7 @@ cpu = 'armv8'
 endian = 'little'
 EOF
 
-cat <<EOF >"native.txt"
+    cat <<EOF >"native.txt"
 [build_machine]
 c = [${CCACHE_PREFIX:+"'$CCACHE_PREFIX',"} 'clang']
 cpp = [${CCACHE_PREFIX:+"'$CCACHE_PREFIX',"} 'clang++']
@@ -201,7 +200,17 @@ EOF
         -Degl=disabled \
         -Dandroid-libbacktrace=disabled \
         --reconfigure
-	
+
+    # Применяем патч только для репозитория 2 (gitlab.freedesktop.org)
+    if [[ "${repo_choice}" == "2" ]]; then
+        if [ -f "patches/tu_gen825.patch" ]; then
+            echo "Применение патча tu_gen825.patch для репозитория 2..."
+            patch -p1 < patches/tu_gen825.patch
+        else
+            echo "Предупреждение: Патч не нужен сборка не из mesa, пропускаем"
+        fi
+    fi
+
     echo "Компиляция через Ninja (это займет время)..."
     ninja -C build-android-aarch64 install
 
@@ -212,26 +221,26 @@ EOF
     echo "Создание архива с драйвером..."
     cd "/tmp/Turnip-$srcfolder/lib"
 	
-   VULKAN_HEADER="$workdir/$srcfolder/include/vulkan/vulkan_core.h"
+    VULKAN_HEADER="$workdir/$srcfolder/include/vulkan/vulkan_core.h"
 
-# Извлекаем номер версии (например, 335)
-if [ -f "$VULKAN_HEADER" ]; then
-    VK_HEADER_VERSION=$(grep -oP '#define VK_HEADER_VERSION \K\d+' "$VULKAN_HEADER")
-    
-    if [ -n "$VK_HEADER_VERSION" ]; then
-        # Формируем версию "1.4.335"
-        VULKAN_VERSION="1.4.$VK_HEADER_VERSION"
+    # Извлекаем номер версии (например, 335)
+    if [ -f "$VULKAN_HEADER" ]; then
+        VK_HEADER_VERSION=$(grep -oP '#define VK_HEADER_VERSION \K\d+' "$VULKAN_HEADER")
+        
+        if [ -n "$VK_HEADER_VERSION" ]; then
+            # Формируем версию "1.4.335"
+            VULKAN_VERSION="1.4.$VK_HEADER_VERSION"
+        else
+            echo "Не удалось определить VK_HEADER_VERSION. Используется версия по умолчанию."
+            VULKAN_VERSION="1.4.335"
+        fi
     else
-        echo "Не удалось определить VK_HEADER_VERSION. Используется версия по умолчанию."
+        echo "Файл vulkan_core.h не найден. Используется версия по умолчанию."
         VULKAN_VERSION="1.4.335"
     fi
-else
-    echo "Файл vulkan_core.h не найден. Используется версия по умолчанию."
-    VULKAN_VERSION="1.4.335"
-fi
 
-# Используем полученную версию при создании meta.json
-cat <<EOF >"meta.json"
+    # Используем полученную версию при создании meta.json
+    cat <<EOF >"meta.json"
 {
   "schemaVersion": 1,
   "name": "Turnip $srcfolder $BUILD_VERSION",
