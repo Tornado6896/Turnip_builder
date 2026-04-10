@@ -15,7 +15,7 @@ diff --git a/src/freedreno/vulkan/tu_knl_kgsl.cc b/src/freedreno/vulkan/tu_knl_k
 index 20c51f93650..0e3dab17e3c 100644
 --- a/src/freedreno/vulkan/tu_knl_kgsl.cc
 +++ b/src/freedreno/vulkan/tu_knl_kgsl.cc
-@@ -1842,6 +1842,8 @@ tu_knl_kgsl_load(struct tu_instance *instance, int fd)
+@@ -1895,6 +1895,8 @@ tu_knl_kgsl_load(struct tu_instance *instance, int fd)
        device->ubwc_config.macrotile_mode = FDL_MACROTILE_4_CHANNEL;
        break;
     case KGSL_UBWC_4_0:
@@ -86,7 +86,7 @@ diff --git a/src/freedreno/common/freedreno_dev_info.h b/src/freedreno/common/fr
 index 89c060567e1..4cdb4eb3504 100644
 --- a/src/freedreno/common/freedreno_dev_info.h
 +++ b/src/freedreno/common/freedreno_dev_info.h
-@@ -422,6 +422,10 @@ struct fd_dev_info {
+@@ -469,6 +469,10 @@ struct fd_dev_info {
         * expected:
         */
        bool has_salu_int_narrowing_quirk;
@@ -128,7 +128,7 @@ the quirk for early a6xx gens.
 
 Signed-off-by: whitebelyash <whbexiumwork@gmail.com>
 ---
- src/freedreno/vulkan/tu_cmd_buffer.cc | 4 ++--
+ src/freedreno/vulkan/tu_cmd_buffer.cc | 5 ++--
  src/freedreno/vulkan/tu_device.cc     | 1 -
  2 files changed, 2 insertions(+), 3 deletions(-)
 
@@ -158,11 +158,11 @@ diff --git a/src/freedreno/vulkan/tu_device.cc b/src/freedreno/vulkan/tu_device.
 index a57dfe5b6ce..f6f69080c7b 100644
 --- a/src/freedreno/vulkan/tu_device.cc
 +++ b/src/freedreno/vulkan/tu_device.cc
-@@ -2700,7 +2700,6 @@ tu_CreateDevice(VkPhysicalDevice physicalDevice,
+@@ -2778,6 +2778,6 @@ tu_CreateDevice(VkPhysicalDevice physicalDevice,
     case 8:
        /* gen8 TODO: */
-       tu_env.debug |= TU_DEBUG_NOLRZ;     /* WRITE iova faults from UCHE */
--      tu_env.debug |= TU_DEBUG_FLUSHALL;  /* dEQP-VK.draw.\*from_compute\* */
+ -      tu_env.debug |= TU_DEBUG_FLUSHALL;  /* dEQP-VK.draw.\*from_compute\* */
+ +      tu_env.debug |= TU_DEBUG_NOLRZ;     /* WRITE iova faults from UCHE */
        vk_device_dispatch_table_from_entrypoints(
           &dispatch_table, &tu_device_entrypoints_a8xx, false);
     }
@@ -181,17 +181,14 @@ investigating.
 Signed-off-by: whitebelyash <whbexiumwork@gmail.com>
 ---
  src/freedreno/common/fd6_gmem_cache.h | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ 1 file changed, 3 insertions(+), 1 deletions(-)
 
 diff --git a/src/freedreno/common/fd6_gmem_cache.h b/src/freedreno/common/fd6_gmem_cache.h
 index c2243d3cb25..b5930309967 100644
 --- a/src/freedreno/common/fd6_gmem_cache.h
 +++ b/src/freedreno/common/fd6_gmem_cache.h
-@@ -43,9 +43,10 @@ __calc_gmem_cache_offsets(const struct fd_dev_info *info, unsigned offset,
+@@ -43,8 +43,19 @@ __calc_gmem_cache_offsets(const struct fd_dev_info *info, unsigned offset,
     unsigned num_ccu = info->num_ccu;
- 
-    /* This seems not to be load bearing, but keeping it for now to match blob: */
--   if (info->chip >= 8)
 +   /* @todo: re-enable */
 +   /*if (info->chip >= 8)
        offset -= 0x78000;
