@@ -17,7 +17,7 @@ index 1234567..abcdefg 100644
 --- a/src/freedreno/common/freedreno_devices.py
 +++ b/src/freedreno/common/freedreno_devices.py
 @@ -1437,0 +1437,149 @@ ))
-+
+
 + # ----------------------------------------------------------------------
 + # БАЗОВАЯ КОНФИГУРАЦИЯ ДЛЯ A8XX (LRZ отключён, предзагрузка включена)
 + # ----------------------------------------------------------------------
@@ -173,10 +173,7 @@ index 1234567..abcdefg 100644
 +         magic_regs = a825_magic_regs,
 +         raw_magic_regs = a825_raw_magic_regs,
 +     ))
-+
- a8xx_gen2 = GPUProps(
-         reg_size_vec4 = 128,
-         sysmem_vpc_attr_buf_size = 131072,
+
 diff --git a/src/freedreno/drm-shim/freedreno_noop.c b/src/freedreno/drm-shim/freedreno_noop.c
 index 7654321..zyxwvut 100644
 --- a/src/freedreno/drm-shim/freedreno_noop.c
