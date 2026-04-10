@@ -11,7 +11,7 @@ workdir="$(pwd)"
 ndkver="android-ndk-r29"
 ndk="$HOME/$ndkver/toolchains/llvm/prebuilt/linux-x86_64/bin"
 sdkver="35"
-
+gpuid=$srcfolder
 # Доступные репозитории
 declare -A REPOS=(
 	[1]="https://github.com/Tornado6896/mesa.git"
@@ -203,9 +203,10 @@ EOF
 
 if [[ "${repo_choice}" == "2" ]]; then
     # Копируем подготовленные файлы
+	gpuid=A8XX
     cp "$workdir/patches/freedreno_devices.py" src/freedreno/common/freedreno_devices.py
     cp "$workdir/patches/freedreno_noop.c" src/freedreno/drm-shim/freedreno_noop.c
-    echo "Файлы для A825 заменены."
+    echo "Файлы для A8XX заменены."
 fi
 
     echo "Компиляция через Ninja (это займет время)..."
@@ -240,7 +241,7 @@ fi
     cat <<EOF >"meta.json"
 {
   "schemaVersion": 1,
-  "name": "Turnip $srcfolder $BUILD_VERSION",
+  "name": "Turnip $gpuid $BUILD_VERSION",
   "description": "$descr",
   "author": "Tornado6896",
   "packageVersion": "1",
